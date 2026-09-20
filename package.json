@@ -1,0 +1,52 @@
+{
+  "name": "dsh-easyplan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DSH 插件（fork 自 dsh-showme-html）：把 agent 写好的 HTML 页展示在对话里；第一阶段整项表态挑方案，第二阶段宿主自动注入点选脚本，用户直接点页面上的元素提意见，回执一行一条回到 agent 手里。",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ],
+      "platform": "web"
+    }
+  },
+  "files": [
+    "lib",
+    "test",
+    "cordis.patch.yml",
+    "README.md",
+    "skill"
+  ],
+  "scripts": {
+    "test": "node test/route.test.mjs && node test/picker.test.mjs && node test/client-bundle.test.mjs && node test/presets.test.mjs && node test/templates.test.mjs && node test/page-smoke.test.mjs",
+    "test:host": "node test/route.test.mjs",
+    "test:picker": "node test/picker.test.mjs",
+    "test:client": "node test/client-bundle.test.mjs",
+    "test:presets": "node test/presets.test.mjs",
+    "test:templates": "node test/templates.test.mjs",
+    "test:page": "node test/page-smoke.test.mjs",
+    "probe": "node test/live-probe.mjs"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "html",
+    "report",
+    "feedback",
+    "picker"
+  ],
+  "license": "MIT"
+}
